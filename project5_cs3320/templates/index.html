@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %} About Attack Heal Counter {% endblock %}
+
+{% block content %}
+    <div class="shell">
+        <h1>About Attack Heal Counter</h1>
+
+        <p>Attack Heal Counter is a rock-paper-scissors combat derivative with a few artistic licenses.</p>
+
+        <p>Each player starts with 100 health. Both players have the following options: Attack, Heal, Counter,
+            Magic.</p>
+        <p>Each attack (or defense) does a variable amount of damage or healing depending on the other player's
+            choice.</p>
+        <p>A table comparing each choice is shown below:</p>
+
+        <table class="pure-table pure-table-bordered centered" id="move-matrix">
+            <thead>
+            <tr>
+                <td width="25%">Player 1 Move</td>
+                <td width="25%">Player 2 Move</td>
+                <td width="25%">Player 1 Health Change</td>
+                <td width="25%">Player 2 Health Change</td>
+            </tr>
+            </thead>
+            <tr>
+                <td>Attack</td>
+                <td>Attack</td>
+                <td>-10</td>
+                <td>-10</td>
+            </tr>
+            <tr>
+                <td>Attack</td>
+                <td>Heal</td>
+                <td>0</td>
+                <td>-10</td>
+            </tr>
+            <tr>
+                <td>Attack</td>
+                <td>Counter</td>
+                <td>-20</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Attack</td>
+                <td>Magic</td>
+                <td>-10</td>
+                <td>-20</td>
+            </tr>
+            <tr>
+                <td>Heal</td>
+                <td>Attack</td>
+                <td>-10</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Heal</td>
+                <td>Heal</td>
+                <td>20</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Heal</td>
+                <td>Counter</td>
+                <td>20</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Heal</td>
+                <td>Magic</td>
+                <td>-10</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Counter</td>
+                <td>Attack</td>
+                <td>0</td>
+                <td>-20</td>
+            </tr>
+            <tr>
+                <td>Counter</td>
+                <td>Heal</td>
+                <td>0</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Counter</td>
+                <td>Counter</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Counter</td>
+                <td>Magic</td>
+                <td>-20</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Magic</td>
+                <td>Attack</td>
+                <td>-20</td>
+                <td>-10</td>
+            </tr>
+            <tr>
+                <td>Magic</td>
+                <td>Heal</td>
+                <td>0</td>
+                <td>-10</td>
+            </tr>
+            <tr>
+                <td>Magic</td>
+                <td>Counter</td>
+                <td>0</td>
+                <td>-20</td>
+            </tr>
+            <tr>
+                <td>Magic</td>
+                <td>Magic</td>
+                <td>-10</td>
+                <td>-10</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

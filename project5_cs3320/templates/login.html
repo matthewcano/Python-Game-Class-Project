@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %} Log In! {% endblock %}
+
+{% block content %}
+<div class="shell login-page">
+    {% if error_msg %}
+    <p class="centered error">{{ error_msg }}</p>
+    {% endif %}
+
+    {% if g.user %}
+        <h3 class="centered">You're already logged in, silly!</h3>
+        <p class="centered"><a href="{{ url_for('user_page',u_name=g.user.name ) }}">
+            Return Home</a></p>
+    {% else %}
+        <ul class="tab">
+          <li><a href="#" class="tablinks" onclick="openTab(event, 'login')">Login</a></li>
+          <li><a href="#" class="tablinks" onclick="openTab(event, 'register')">Register</a></li>
+        </ul>
+
+        <div id="login" class="tabcontent">
+            <form class="pure-form pure-form-aligned" method="POST" action="/login">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <label for="username">Username</label>
+                        <input name="username" id="username" type="text" maxlength="60">
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="password">Password</label>
+                        <input name="password" id="password" type="password" placeholder="">
+                    </div>
+
+                    <div class="pure-controls">
+                        <button type="submit" class="pure-button pure-button-primary"><i class="fa fa-sign-in"></i> Login</button>
+                    </div>
+                </fieldset>
+
+            </form>
+        </div>
+
+        <div id="register" class="tabcontent">
+            <form class="pure-form pure-form-aligned" enctype="multipart/form-data" method="POST" action="/create_user">
+                    <div class="pure-control-group">
+                        <label for="create_username">Username</label>
+                        <input name="username" id="create_username" type="text" placeholder="" required>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="create_password">Password</label>
+                        <input name="password" id="create_password" type="password" placeholder="" required>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input name="confirm_password" id="confirm_password" type="password" placeholder="" required>
+                    </div>
+                     <label>Upload Avatar Image: (Optional)
+                    {#  a file input lets us upload a file; accept only images #}
+                    <input type="file" name="image" id="image" accept="image/*"></label>
+                    <div class="pure-controls">
+                        <button type="submit" class="pure-button pure-button-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create Account</button>
+                    </div>
+
+
+                            </form>
+        </div>
+    {% endif %}
+
+</div>
+         <script src="{{ url_for('static', filename='login-tabs.js') }}" async></script>
+
+{% endblock %}

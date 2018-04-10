@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ user.name }}'s Page {% endblock %}
+
+{% block content %}
+<div class="shell">
+    <h1>User: <span id="the_user_name">{{ user.name }}</span></h1>
+    <div class="user-info">
+        <span class="avatar">
+            <img class="avatar" src="{{ url_for('get_photo', u_name = user.name) }}">
+        </span>
+        <span class="whitespace">
+            <img src="{{ url_for('static', filename='fighter1.png') }}" align="left" class="fighter-pic">
+        </span>
+        Details about the user!
+    </div>
+
+
+</div>
+{% endblock %}

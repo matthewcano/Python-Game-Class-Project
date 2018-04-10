@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Waiting Room {% endblock %}
+
+{% block content %}
+<div class="shell">
+
+    <div class="join-waiting-list centered">
+        <h1>Welcome to the waiting room.</h1>
+
+        <p>We are currently waiting on one more person to play. Sit tight.</p>
+        <div><img src="{{ url_for('static', filename='waiting_mage.gif') }}"></div>
+        <p>You'll be redirected automatically.</p>
+    </div>
+
+</div>
+<script src="{{ url_for('static', filename='waitingroom.js') }}" async></script>
+{% endblock %}

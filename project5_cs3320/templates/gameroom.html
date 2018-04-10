@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %} Game Time - Fight! {% endblock %}
+
+
+{% block content %}
+<div class="shell">
+    <h1 class="centered">Game Time - Fight!</h1>
+
+    <div class="game_itself">
+        <div class="centered" id="combat_log">
+            Attack Happened! <br> Damage Dealt!
+        </div>
+
+
+        <table id="combat_table" class="pure-table pure-table-horizontal">
+            <tr class="combat-row">
+                <td width="50%" id="p1">
+                    <span id="fight_username">{{ user.user_name }}</span><br>
+                    <span class="health-bar" id="p1-health"></span> (<span id="p1-health-value">{{ user.health }}</span>0/100)
+                </td>
+                <td width="50%" id="p2">
+                    {{ opponent.user_name }}<br>
+                    <span class="health-bar" id="p2-health"></span> (<span id="p2-health-value">{{ opponent.health }}</span>0/100)
+                </td>
+            </tr>
+            <tr class="combat-row centered">
+                <input type="text" id="action_exist" hidden value="{{ user.action }}">
+                <td colspan="2">
+                    <button class="pure-button combat-action" id="attack">Attack</button>
+                    &#8195;&#8195;&#8195;&#8195;
+                    <button class="pure-button combat-action" id="p_attack">Power Attack</button>
+                    &#8195;&#8195;&#8195;&#8195;
+                    <button class="pure-button combat-action" id="defense">Defense</button>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+
+    <!-- ==================== CHAT BOX ==================== -->
+    <div class="chat-box">
+
+        <div class="chats"  style="height:12em;width:100%;overflow:auto;">
+            <ul class="messages">
+                <div id="messages">
+                </div>
+            </ul>
+        </div>
+
+       <div class="centered">
+           <form class="pure-form">
+                <fieldset>
+                    <label for="chat-input">Chat</label>
+                    <input name="chat-input" id="chat-input" type="text" size="42" autocomplete="off"/>
+                    <input type="hidden" name="_csrf_token" value="{{ session.csrf_token }}">
+                    {% if g.user %}
+                        <input type="hidden" name="username" id="username" value="{{ g.user.name }}">
+                    {% else %}
+                        <input type="hidden" name="username" id="username">
+                    {% endif %}
+                    <input type="hidden" id="chat_key" value="{{ chat_key }}">
+                    <button class="pure-button">Send!</button>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+    <!-- ==================== END CHAT BOX ==================== -->
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Modal Header</h2>
+    </div>
+    <div class="modal-body">
+      <p>Some text in the Modal Body</p>
+      <p>Some other text...</p>
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+
+     <script src="{{ url_for('static', filename='chatsocket.js') }}" async></script>
+     <script src="{{ url_for('static', filename='modal.js')}}" async></script>
+    <script src="{{ url_for('static', filename='gamesocket.js') }}" async></script>
+{% endblock %}
+

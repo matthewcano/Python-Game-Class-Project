@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attack Heal Counter!!{% block title %}{% endblock %}</title>
+    <!-- BootstrapCDN for FontAwesome icons -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <!-- Pure CSS -->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css"
+              media="screen and (min-width: 48em)">
+    <!-- My CSS -->
+        <link rel="stylesheet" href="/static/styles.css">
+    <!-- Socket.io -->
+        <script src="https://cdn.jsdelivr.net/socket.io-client/1.3.2/socket.io.min.js"></script>
+        <script>
+            // Set up CSRF Token Everywhere
+             var csrfToken = '{{ session.csrf_token }}';
+        </script>
+</head>
+{% block navbar %}
+
+    {% if g.user %}
+    <div class="join-waiting-list">
+        <form action="/join_waitlist" method="post">
+            <input type="hidden" name="username" id="username" value="{{ g.user.name }}">
+                <button type="submit" class="pure-button pure-button-primary">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Join A Game
+                </button>
+        </form>
+    </div>
+    {% endif %}
+
+
+
+    <div class="pure-menu pure-menu-horizontal navbar centered flowers">
+        <a href="{{ url_for('index') }}" class="pure-menu-heading pure-menu-link">Home</a>
+        <ul class="pure-menu-list">
+            {% if g.user %}
+                <li class="pure-menu-item">
+                    <a href="{{ url_for('user_page', u_name=g.user.name) }}" class="pure-menu-link">My Page</a>
+                </li>
+            {% endif %}
+
+            <li class="pure-menu-item">
+                {% if g.user %}
+                    <a href="{{ url_for('handle_logout') }}" class="pure-menu-link">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login_form') }}" class="pure-menu-link">Login</a>
+                {% endif %}
+            </li>
+
+        </ul>
+    </div>
+
+
+{% endblock navbar %}
+
+
+<body>
+{% block content %}
+    Contentify me, Cap'n!
+{% endblock %}
+</body>
+</html>
